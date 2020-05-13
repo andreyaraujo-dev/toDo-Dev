@@ -7,6 +7,9 @@ import './src/database/index';
 import bodyParser from 'body-parser';
 import express from 'express';
 import homeRoutes from './src/routes/homeRoutes';
+import userRoutes from './src/routes/userRoutes';
+import loginRoutes from './src/routes/auth/loginRoutes';
+import logoutRoutes from './src/routes/auth/logoutRoutes';
 
 class App {
   constructor() {
@@ -26,6 +29,9 @@ class App {
 
   routes() {
     this.app.use('/', homeRoutes);
+    this.app.use('/user/', userRoutes);
+    this.app.use('/login/', loginRoutes);
+    this.app.use('/logout/', logoutRoutes);
   }
 }
 
