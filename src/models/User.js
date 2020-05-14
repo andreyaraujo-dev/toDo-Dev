@@ -65,6 +65,7 @@ export default class User extends Model {
       },
     }, {
       sequelize,
+      tableName: 'Users',
     });
 
     // Fazendo um hash da senha enviada pelo usuário
@@ -81,4 +82,9 @@ export default class User extends Model {
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
+
+  // static associate(models) {
+  //   this.hasMany(models.Task, { foreignKey: 'id_user_fk' });
+  //   this.hasMany(models.Project, { foreignKey: 'user_id_fk' });
+  // }
 }
