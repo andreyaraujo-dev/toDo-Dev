@@ -1,8 +1,10 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 import User from '../models/User';
+import Task from '../models/Task';
+import Project from '../models/Project';
 
-const models = [User];
+const models = [User, Task, Project];
 
 const connection = new Sequelize(databaseConfig);
 

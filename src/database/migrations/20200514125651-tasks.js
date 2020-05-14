@@ -33,7 +33,7 @@ module.exports = {
         model: 'users',
         key: 'id',
       },
-      onDelete: 'SET NULL',
+      onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     },
     id_project_fk: {
