@@ -59,7 +59,7 @@ export default class Project extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'id_user_fk' });
+    this.belongsTo(models.User, { foreignKey: 'user_id_fk' });
     this.hasMany(models.Task, { foreignKey: 'id_project_fk' });
   }
 }

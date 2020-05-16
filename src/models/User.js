@@ -65,7 +65,7 @@ export default class User extends Model {
       },
     }, {
       sequelize,
-      tableName: 'Users',
+      tableName: 'users',
     });
 
     // Fazendo um hash da senha enviada pelo usuário
