@@ -25,7 +25,7 @@ export default async (req, res, next) => {
 
     if (!user) {
       return res.status(401).json({
-        errors: ['Usuário inválido, faça login novamente'],
+        errors: ['Invalid user, please log in again'],
       });
     }
 
@@ -34,7 +34,7 @@ export default async (req, res, next) => {
     return next();
   } catch (e) {
     return res.status(401).json({
-      errors: ['Token expirado ou inválido'],
+      errors: ['Expired or invalid token'],
     });
   }
 };

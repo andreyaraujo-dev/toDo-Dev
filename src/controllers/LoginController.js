@@ -7,7 +7,7 @@ class LoginController {
 
     if (!username || !password) {
       return res.status(401).json({
-        errors: ['Credenciais inválidas'],
+        errors: ['invalid credentials'],
       });
     }
 
@@ -15,13 +15,13 @@ class LoginController {
 
     if (!user) {
       return res.status(401).json({
-        errors: ['Usuário não existe'],
+        errors: ['User does not exist'],
       });
     }
 
     if (!(await user.passwordIsValid(password))) {
       return res.status(401).json({
-        errors: ['Senha inválida'],
+        errors: ['invalid password'],
       });
     }
 

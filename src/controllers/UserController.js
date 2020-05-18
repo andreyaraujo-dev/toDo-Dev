@@ -23,7 +23,7 @@ class UserController {
 
       if (!user) {
         return res.status(400).json({
-          errors: ['Usuário não existe'],
+          errors: ['User does not exist'],
         });
       }
 
@@ -47,7 +47,7 @@ class UserController {
 
       if (!user) {
         return res.status(400).json({
-          errors: ['Usuário não existe'],
+          errors: ['User does not exist'],
         });
       }
 
@@ -70,7 +70,7 @@ class UserController {
 
       if (!user) {
         return res.status(400).json({
-          errors: ['Usuário não existe'],
+          errors: ['User does not exist'],
         });
       }
 
