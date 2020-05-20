@@ -10,7 +10,8 @@ import homeRoutes from './src/routes/homeRoutes';
 import userRoutes from './src/routes/userRoutes';
 import loginRoutes from './src/routes/auth/loginRoutes';
 import logoutRoutes from './src/routes/auth/logoutRoutes';
-import projectsRoutes from './src/routes/projectRoutes';
+import projectRoutes from './src/routes/projectRoutes';
+import taskRoutes from './src/routes/taskRoutes';
 
 class App {
   constructor() {
@@ -33,7 +34,8 @@ class App {
     this.app.use('/user/', userRoutes);
     this.app.use('/login/', loginRoutes);
     this.app.use('/logout/', logoutRoutes);
-    this.app.use('/projects/', projectsRoutes);
+    this.app.use('/projects/', projectRoutes);
+    this.app.use('/tasks/', taskRoutes);
   }
 }
 
