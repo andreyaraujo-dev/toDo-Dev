@@ -27,6 +27,7 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(express.static(resolve(__dirname, 'uploads')));
+    this.app.use(express.static(resolve(__dirname, 'public')));
   }
 
   routes() {

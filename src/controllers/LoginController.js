@@ -2,6 +2,10 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
 class LoginController {
+  index(req, res) {
+    res.render('auth/login');
+  }
+
   async store(req, res) {
     const { username = '', password = '' } = req.body;
 
