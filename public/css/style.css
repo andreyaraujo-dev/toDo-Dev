@@ -1,3 +1,85 @@
-.container-login {
-  height: 100% !important;
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.btn {
+  border-radius: 2rem !important;
+}
+
+.row {
+  box-sizing: border-box !important;
+  margin-right: 0 !important;
+}
+
+.img-login {
+  width: 930px;
+  height: 450px;
+  position: relative;
+  top: 30px;
+  left: 30px;
+  z-index: 1;
+}
+
+.footer {
+  left: 67% !important;
+  color: rgb(114, 114, 114);
+}
+
+/* ----------------------- */
+.label-float{
+  position: relative;
+  padding-top: 13px;
+  width: max-content;
+}
+
+.label-float input{
+  border: 0;
+  border-bottom: 2px solid lightgrey;
+  outline: none;
+  width: 45vh;
+  min-width: 180px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -webkit-appearance:none;
+  border-radius: 0;
+}
+
+.label-float input:focus{
+  border-bottom: 2px solid #3951b2;
+}
+
+.label-float input::placeholder{
+  color:transparent;
+}
+
+.label-float label{
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 13px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+}
+
+.label-float input:required:invalid + label{
+  color: red;
+}
+.label-float input:focus:required:invalid{
+  border-bottom: 2px solid red;
+}
+.label-float input:required:invalid + label:before{
+  content: '*';
+}
+.label-float input:focus + label,
+.label-float input:not(:placeholder-shown) + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: #3951b2;
 }
