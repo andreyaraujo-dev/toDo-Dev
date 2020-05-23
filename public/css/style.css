@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   padding: 0;
   margin: 0;
 }
@@ -82,4 +82,102 @@ html, body {
   font-size: 13px;
   margin-top: 0;
   color: #3951b2;
+}
+
+.menu-lateral {
+  color: #FFFFFF !important;
+  background-color: #007bff !important;
+}
+
+.menu-lateral a {
+  color: #FFFFFF !important;
+}
+
+.menu-lateral a:hover {
+  background-color: #006bdd !important;
+}
+
+.menu-topo {
+  z-index: 1 !important;
+  box-shadow: 5px 0 6px #0000008c !important;
+}
+
+.div-btn-actions {
+  position: fixed;
+  z-index: 1;
+  left: 90%;
+  top: 85%;
+  width: 5%;
+  height: 10%;
+  border-radius: 100px;
+  box-shadow: 3px 3px 3px #0000008c;
+}
+
+.btn-actions {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  box-shadow: 3px 3px 3px #0000008c;
+}
+
+.btn-actions:hover {
+  background-color: #006bdd;
+}
+
+.btn-actions:focus {
+  outline: none !important;
+}
+
+.btn-actions-tasks {
+  position: fixed;
+  z-index: 1;
+  left: 91%;
+  top: 77%;
+  width: 5%;
+  height: 9%;
+  border-radius: 100px;
+  box-shadow: 3px 3px 3px #0000008c;
+}
+
+.btn-actions-tasks:hover {
+  background-color: #006bdd;
+}
+
+.btn-actions-tasks:focus {
+  outline: none !important;
+}
+
+.btn-actions-projects {
+  position: fixed;
+  z-index: 1;
+  left: 91%;
+  top: 69%;
+  width: 5%;
+  height: 9%;
+  border-radius: 100px;
+  box-shadow: 3px 3px 3px #0000008c;
+}
+
+.btn-actions-projects:hover {
+  background-color: #006bdd;
+}
+
+.btn-actions-projects:focus {
+  outline: none !important;
+}
+
+.ml-4 {
+  margin-left: 2.5rem!important;
+}
+
+.menu-actions {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.menu-actions a:hover {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.icon-cards {
+  font-size: xxx-large !important;
 }

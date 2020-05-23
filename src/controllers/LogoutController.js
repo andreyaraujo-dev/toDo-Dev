@@ -1,16 +1,16 @@
 class LogoutController {
   async logout(req, res) {
     try {
-      const { authorization } = req.headers;
+      // const { authorization } = req.headers;
 
-      if (!authorization) {
-        return res.status(401).json({
-          errors: ['Login required'],
-        });
-      }
+      // if (!authorization) {
+      //   return res.status(401).json({
+      //     errors: ['Login required'],
+      //   });
+      // }
 
-      localStorage.removeItem('token');
-      sessionStorage.removeItem('token');
+      req.session.destroy();
+      // return res.redirect('/login');
 
       return res.status(200).json({ auth: false, token: null });
     } catch (e) {

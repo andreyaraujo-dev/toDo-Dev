@@ -5,12 +5,10 @@ class UserController {
     try {
       await User.create(req.body);
       req.flash('success', 'Your account was created');
-      return res.redirect('/login/');
+      return req.session.save(() => res.redirect('/login/'));
     } catch (e) {
-      return res.render('auth/login', { errors: e.errors.map((err) => err.message) });
-      // return res.status(400).json({
-      //   errors: e.errors.map((err) => err.message),
-      // });
+      req.flash('errors', e);
+      return req.session.save(() => res.redirect('/login/'));
     }
   }
 

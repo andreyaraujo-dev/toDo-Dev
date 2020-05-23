@@ -1,13 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <form action="/logout/" method="post">
-    <button type="submit">Sair</button>
-  </form>
-</body>
-</html>
+<%- include('layouts/page') %>
+<%- include('layouts/menuTop') %>
+
+<div class="row h-100">
+  <%- include('layouts/menu') %>
+  <div class="col-sm-10 h-100">
+    <div class="container-fluid border mt-4 h-100 p-3">
+      <div class="row mb-3">
+        <div class="col-sm-12 text-center">
+          <h1 class="text-center">Your tasks this week</h1>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-sm-4">
+          <div class="card p-3">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-sm-9">
+                  <div class="row">
+                    <h3>Tuesday</h3>
+                  </div>
+                  <div class="row">
+                    <p>May 13, 2020</p>
+                  </div>
+                </div>
+                <div class="col-sm-3"><i class="fa fa-calendar text-primary icon-cards"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card p-3">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-sm-9">
+                  <div class="row">
+                    <h2>0</h2>
+                  </div>
+                  <div class="row">
+                    <p>Tasks completed</p>
+                  </div>
+                </div>
+                <div class="col-sm-3"><i class="fa fa-tasks text-primary icon-cards"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card p-3">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-sm-9">
+                  <div class="row">
+                    <h2>0</h2>
+                  </div>
+                  <div class="row">
+                    <p>Pending tasks</p>
+                  </div>
+                </div>
+                <div class="col-sm-3"><i class="fa fa-warning text-primary icon-cards"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row mt-5">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                Isto é um texto dentro de um card.
+                <div class="d-flex ml-auto">
+                  <i class="fa fa-circle mr-3"></i>
+                  <i class="fa fa-trash text-danger"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                Isto é um texto dentro de um card.
+                <div class="d-flex ml-auto">
+                  <i class="fa fa-circle mr-3"></i>
+                  <i class="fa fa-trash text-danger"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                Isto é um texto dentro de um card.
+                <div class="d-flex ml-auto">
+                  <i class="fa fa-circle mr-3"></i>
+                  <i class="fa fa-trash text-danger"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group dropup div-btn-actions">
+        <button type="button" class="btn btn-primary btn-actions dropdown" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-plus"></i>
+        </button>
+        <div class="dropdown-menu menu-actions border-0">
+          <!-- Links do menu dropleft -->
+          <a class="dropdown-item p-0 mb-2 ml-4" href="#">
+            <button type="button" class="btn btn-primary "><i class="fa fa-columns"></i></button>
+          </a>
+          <a class="dropdown-item p-0 ml-4" href="#">
+            <button type="button" class="btn btn-primary "><i class="fa fa-tasks"></i></button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
