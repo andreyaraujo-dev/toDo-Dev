@@ -6,6 +6,9 @@ dotenv.config();
 import './src/database/index';
 import bodyParser from 'body-parser';
 import express from 'express';
+// import session from 'express-session';
+import flash from 'connect-flash';
+// import csrf from 'csurf';
 import homeRoutes from './src/routes/homeRoutes';
 import userRoutes from './src/routes/userRoutes';
 import loginRoutes from './src/routes/auth/loginRoutes';
@@ -24,6 +27,7 @@ class App {
   }
 
   middlewares() {
+    this.app.use(flash());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(express.static(resolve(__dirname, 'uploads')));

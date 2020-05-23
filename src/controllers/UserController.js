@@ -3,17 +3,14 @@ import User from '../models/User';
 class UserController {
   async store(req, res) {
     try {
-      const newUser = await User.create(req.body);
-      const {
-        id, name, email, username,
-      } = newUser;
-      return res.json({
-        id, name, email, username,
-      });
+      await User.create(req.body);
+      req.flash('success', 'Your account was created');
+      return res.redirect('/login/');
     } catch (e) {
-      return res.status(400).json({
-        errors: e.errors.map((err) => err.message),
-      });
+      return res.render('auth/login', { errors: e.errors.map((err) => err.message) });
+      // return res.status(400).json({
+      //   errors: e.errors.map((err) => err.message),
+      // });
     }
   }
 

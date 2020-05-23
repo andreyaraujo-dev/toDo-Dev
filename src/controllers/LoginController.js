@@ -3,30 +3,24 @@ import User from '../models/User';
 
 class LoginController {
   index(req, res) {
-    res.render('auth/login');
+    res.render('auth/login', { errors: [], success: [] });
   }
 
   async store(req, res) {
     const { username = '', password = '' } = req.body;
 
     if (!username || !password) {
-      return res.status(401).json({
-        errors: ['invalid credentials'],
-      });
+      return res.render('auth/login', { errors: ['invalid credentials'] });
     }
 
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
-      return res.status(401).json({
-        errors: ['User does not exist'],
-      });
+      return res.render('auth/login', { errors: ['User does not exist'] });
     }
 
     if (!(await user.passwordIsValid(password))) {
-      return res.status(401).json({
-        errors: ['invalid password'],
-      });
+      return res.render('auth/login', { errors: ['invalid password'] });
     }
 
     const { id } = user;
@@ -34,7 +28,7 @@ class LoginController {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 
-    return res.json({ auth: true, token });
+    return res.render('home', { auth: true, token });
   }
 }
 
