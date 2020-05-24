@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import homeController from '../controllers/HomeController';
-import loginRequired from '../middlewares/loginRequired';
+import authenticated from '../middlewares/authentication';
 
 const router = new Router();
 
-router.get('/', loginRequired, homeController.index);
+router.get('/', authenticated, homeController.index);
 
 export default router;
