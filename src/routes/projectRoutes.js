@@ -1,13 +1,14 @@
 import { Router } from 'express';
 import projectController from '../controllers/ProjectController';
-import loginRequired from '../middlewares/loginRequired';
+import { ensureAuthenticated } from '../middlewares/authentication';
+
 
 const router = new Router();
 
-router.post('/', loginRequired, projectController.store);
-router.put('/:id', loginRequired, projectController.update);
-router.get('/:id', loginRequired, projectController.show);
-router.get('/', loginRequired, projectController.index);
-router.delete('/:id', loginRequired, projectController.delete);
+router.post('/', ensureAuthenticated, projectController.store);
+router.put('/:id', ensureAuthenticated, projectController.update);
+router.get('/:id', ensureAuthenticated, projectController.show);
+router.get('/', ensureAuthenticated, projectController.index);
+router.delete('/:id', ensureAuthenticated, projectController.delete);
 
 export default router;

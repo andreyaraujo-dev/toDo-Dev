@@ -1,30 +1,35 @@
-import LocalStrategy from 'passport-local';
 import User from '../models/User';
 
-module.exports = (passport) => {
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-  passport.deserializeUser(async (id, done) => {
-    await User.findByPk(id, (err, user) => {
-      done(err, user);
-    });
-  });
+passport.serializeUser((user, done) => {
+  console.log('------SerializeUser: ', user);
+  return done(null, user.id);
+});
 
-  async function findUser(username, callback) {
-    await User.findOne({ where: { username } });
+// eslint-disable-next-line consistent-return
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findByPk(id);
+    console.log('-------DeserializeUser: ', user);
+    return done(null, user);
+  } catch (e) {
+    done(e);
   }
+});
 
-  passport.use(new LocalStrategy({ passReqToCallback: true },
-    async (req, username, password, done) => {
-      findUser(username, async (err, user) => {
-        if (err) return done(err);
-        if (!user) return done(null, false);
-        if (!(await user.passwordIsValid(password))) {
-          if (err) return done(err);
-        }
-        return done(null, user);
-      });
-    }));
-};
+passport.use(new LocalStrategy({ passReqToCallback: true },
+  async (req, username, password, done) => {
+    const user = await User.findOne({ where: { username } });
+    if (!user) {
+      return done(null, false, { message: req.flash('errors', 'Usuario não existe') });
+    }
+    if (!(await user.passwordIsValid(password))) {
+      return done(null, false, { message: req.flash('errors', 'Senha incorreta') });
+    }
+    console.log(user);
+    return done(null, user);
+  }));
+
+module.exports = passport;

@@ -37,25 +37,18 @@ class UserController {
   }
 
   async show(req, res) {
+    const userId = req.user.id;
     try {
-      const user = await User.findByPk(req.userId);
+      const user = await User.findByPk(userId);
 
       if (!user) {
-        return res.status(400).json({
-          errors: ['User does not exist'],
-        });
+        req.flash('errors', 'User not exists');
+        return res.redirect('back');
       }
 
-      const {
-        id, name, username, email, bio, created_at,
-      } = user;
-      return res.json({
-        id, name, username, email, bio, created_at,
-      });
+      return res.render('user/perfil');
     } catch (e) {
-      return res.status(400).json({
-        errors: e.errors.map((err) => err.message),
-      });
+      return res.render('404', req.flash('errors', e));
     }
   }
 

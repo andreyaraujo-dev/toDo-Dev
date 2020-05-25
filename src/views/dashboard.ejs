@@ -17,10 +17,10 @@
               <div class="row">
                 <div class="col-sm-9">
                   <div class="row">
-                    <h3>Tuesday</h3>
+                    <h3><%= date.day %></h3>
                   </div>
                   <div class="row">
-                    <p>May 13, 2020</p>
+                    <p><%= date.dayNumber %> <%= date.month %>, <%= date.year %></p>
                   </div>
                 </div>
                 <div class="col-sm-3"><i class="fa fa-calendar text-primary icon-cards"></i></div>
@@ -34,7 +34,7 @@
               <div class="row">
                 <div class="col-sm-9">
                   <div class="row">
-                    <h2>0</h2>
+                    <h2><%= tasksCompleted.count %> </h2>
                   </div>
                   <div class="row">
                     <p>Tasks completed</p>
@@ -51,7 +51,7 @@
               <div class="row">
                 <div class="col-sm-9">
                   <div class="row">
-                    <h2>0</h2>
+                    <h2><%= tasksPending.count %> </h2>
                   </div>
                   <div class="row">
                     <p>Pending tasks</p>
