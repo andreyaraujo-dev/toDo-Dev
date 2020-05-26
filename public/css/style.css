@@ -83,6 +83,43 @@ html, body {
   margin-top: 0;
   color: #3951b2;
 }
+.label-float textarea{
+  border: 0;
+  border-bottom: 2px solid lightgrey;
+  outline: none;
+  width: 45vh;
+  min-width: 180px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -webkit-appearance:none;
+  border-radius: 0;
+}
+
+.label-float textarea:focus{
+  border-bottom: 2px solid #3951b2;
+}
+
+.label-float textarea::placeholder{
+  color:transparent;
+}
+
+.label-float textarea:required:invalid + label{
+  color: red;
+}
+.label-float textarea:focus:required:invalid{
+  border-bottom: 2px solid red;
+}
+.label-float textarea:required:invalid + label:before{
+  content: '*';
+}
+.label-float textarea:focus + label,
+.label-float textarea:not(:placeholder-shown) + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: #3951b2;
+}
 
 .menu-lateral {
   color: #FFFFFF !important;
@@ -180,4 +217,28 @@ html, body {
 
 .icon-cards {
   font-size: xxx-large !important;
+}
+
+.icon-perfil {
+  font-size: x-large !important;
+}
+
+.icon-btn {
+  font-size: large !important;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.icon-btn:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.icon-btn-danger:hover {
+  background-color: rgb(255, 202, 202) !important;
+}
+
+.icon-btn-warning:hover {
+  background-color: rgb(249, 255, 170) !important;
 }

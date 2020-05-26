@@ -5,8 +5,9 @@ import { ensureAuthenticated } from '../middlewares/authentication';
 const router = new Router();
 
 router.post('/', userController.store);
-router.put('/', ensureAuthenticated, userController.update);
+router.get('/edit', ensureAuthenticated, userController.edit);
+router.post('/update', ensureAuthenticated, userController.update);
 router.get('/perfil', ensureAuthenticated, userController.show);
-router.delete('/', ensureAuthenticated, userController.delete);
+router.post('/delete', ensureAuthenticated, userController.delete);
 
 export default router;

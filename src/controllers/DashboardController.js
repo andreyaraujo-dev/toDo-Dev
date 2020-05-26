@@ -20,7 +20,6 @@ class DashboardController {
       const tasksPending = await Task.findAndCountAll({
         where: { completed: 1, id_user_fk: userId },
       });
-      console.log(tasksCompleted);
       return res.render('dashboard', {
         user, tasksCompleted, tasksPending, date,
       });

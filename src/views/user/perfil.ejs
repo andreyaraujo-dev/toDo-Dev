@@ -1,1 +1,74 @@
-estou no perfil
+<%- include('../layouts/page') %>
+<%- include('../layouts/menuTop') %>
+
+<div class="row h-100">
+  <%- include('../layouts/menu') %>
+  <div class="col-sm-10 h-100">
+    <div class="container-fluid border mt-4 h-100 p-3">
+      <div class="row mb-3">
+        <div class="col-sm-12 text-center">
+          <h1 class="text-center">Account</h1>
+          <%- include('../layouts/messages') %>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="card col-sm-6 m-auto p-3 border">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-id-card align-middle mt-4 text-primary icon-perfil"></i></div>
+              <div class="col-sm-11">
+                <div class="row ml-2"><h2><%= user.name %></h2></div>
+                <div class="row ml-2"><h6><%= user.email %></h6></div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-at text-primary icon-perfil"></i></div>
+              <div class="col-sm-11">
+                <div class="row ml-2">
+                  <h6><%= user.username %></h6>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-id-card-o text-primary icon-perfil"></i></div>
+              <div class="col-sm-11">
+                <div class="row ml-2">
+                  <h6><%= user.bio %></h6>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-certificate text-primary icon-perfil"></i></div>
+              <div class="col-sm-11">
+                <div class="row ml-2">
+                  <h6>Member since <%= date.dayNumber %> <%= date.month %>, <%= date.year %></h6>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-area-chart text-primary mt-2 icon-perfil"></i></div>
+              <div class="col-sm-11">
+                <div class="row ml-2"><h6><%= projectCompleted.count %> projects completed.</h6></div>
+                <div class="row ml-2"><h6><%= tasksCompleted.count %> tasks done</h6></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer border-0">
+            <div class="btn-group d-flex float-right">
+              <a href="/user/edit">
+                <i class="fa fa-edit mr-3 text-warning icon-btn icon-btn-warning"></i>
+              </a>
+              <i class="fa fa-trash text-danger icon-btn icon-btn-danger" data-toggle="modal" data-target="#modal-delete-user"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../layouts/modalDeleteUser') %>
