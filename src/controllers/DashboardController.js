@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import Task from '../models/Task';
 
 class DashboardController {
@@ -20,11 +21,14 @@ class DashboardController {
       const tasksPending = await Task.findAndCountAll({
         where: { completed: 1, id_user_fk: userId },
       });
+      const tasks = await Task.sequelize.query('SELECT * FROM tasks WHERE YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1)',
+        { type: sequelize.QueryTypes.SELECT });
+
       return res.render('dashboard', {
-        user, tasksCompleted, tasksPending, date,
+        user, tasksCompleted, tasksPending, date, tasks,
       });
     } catch (e) {
-      return res.send(req.flash('errors', 'Não foi posspivel contar as tarefas'));
+      return res.render('404', req.flash('errors', 'Não foi posspivel contar as tarefas'));
     }
   }
 }

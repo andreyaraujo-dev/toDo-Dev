@@ -1,29 +1,49 @@
+import sequelize from 'sequelize';
 import Task from '../models/Task';
 import Project from '../models/Project';
 
 class TaskController {
   async index(req, res) {
     try {
-      const tasks = await Task.findAll({
+      const userId = req.user.id;
+      const { user } = req;
+      const allTasks = await Task.findAll({
         attributes: ['id', 'title', 'description', 'notes', 'delivery_date', 'completed'],
-        where: { id_user_fk: req.userId },
+        where: { id_user_fk: userId },
         include: {
           model: Project,
           attributes: ['id', 'title'],
         },
       });
 
-      if (!tasks) {
-        return res.status(400).json({
-          errors: ['Tasks does not exist'],
-        });
+      const weekTasks = await Task.sequelize.query('SELECT * FROM tasks WHERE YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1)',
+        { type: sequelize.QueryTypes.SELECT });
+
+      if (!allTasks || !weekTasks) {
+        return res.render('layouts/404');
       }
 
-      return res.json({ tasks });
+      return res.render('tasks/home', { user, allTasks, weekTasks });
     } catch (e) {
       return res.status(401).json({
         errors: e.errors.map((err) => err.message),
       });
+    }
+  }
+
+  async indexCreate(req, res) {
+    const userId = req.user.id;
+    const { user } = req;
+    try {
+      const projects = await Project.findAll({
+        where: {
+          user_id_fk: userId,
+        },
+      });
+      console.log(projects);
+      return res.render('tasks/create', { projects, user });
+    } catch (e) {
+      return res.render('layouts/404');
     }
   }
 
@@ -32,22 +52,14 @@ class TaskController {
       const task = await Task.create(req.body);
 
       if (!task) {
-        return res.status(401).json({
-          errors: ['Unable to register'],
-        });
+        req.falsh('errors', 'The task could not be created');
+        return res.redirect('back');
       }
 
-      const {
-        id, title, description, notes, delivery_date, completed, id_project_fk,
-      } = task;
-
-      return res.json({
-        id, title, description, notes, delivery_date, completed, id_project_fk,
-      });
+      req.flash('success', 'Task created');
+      return res.redirect('/tasks');
     } catch (e) {
-      return res.status(401).json({
-        errors: e.errors.map((err) => err.message),
-      });
+      return res.render('layouts/404', req.flash('errors', 'Não foi possivel inserir a tarefa'));
     }
   }
 

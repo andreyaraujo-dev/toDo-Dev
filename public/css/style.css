@@ -83,6 +83,66 @@ html, body {
   margin-top: 0;
   color: #3951b2;
 }
+/* ------------------------------- */
+/* inputs dos formularios */
+.label-float-forms{
+  position: relative;
+  padding-top: 13px;
+  width: max-content;
+}
+
+.label-float-forms input{
+  border: 0;
+  border-bottom: 2px solid lightgrey;
+  outline: none;
+  width: max-content;
+  min-width: 570px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -webkit-appearance:none;
+  border-radius: 0;
+}
+
+.label-float-forms input:focus{
+  border-bottom: 2px solid #3951b2;
+}
+
+.label-float-forms input::placeholder{
+  color:transparent;
+}
+
+.label-float-forms label{
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 13px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+}
+
+.label-float-forms input:required:invalid + label{
+  color: red;
+}
+.label-float-forms input:focus:required:invalid{
+  border-bottom: 2px solid red;
+}
+.label-float-forms input:required:invalid + label:before{
+  content: '*';
+}
+.label-float-forms input:focus + label,
+.label-float-forms input:not(:placeholder-shown) + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: #3951b2;
+}
+
+/* inputs dos formularios */
+
+/* configurando textarea */
 .label-float textarea{
   border: 0;
   border-bottom: 2px solid lightgrey;
@@ -120,7 +180,87 @@ html, body {
   margin-top: 0;
   color: #3951b2;
 }
+/* configurando textarea */
+/* textarea de formularios */
+.label-float-forms textarea{
+  border: 0;
+  border-bottom: 2px solid lightgrey;
+  outline: none;
+  width: 570px;
+  min-width: 180px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -webkit-appearance:none;
+  border-radius: 0;
+}
 
+.label-float-forms textarea:focus{
+  border-bottom: 2px solid #3951b2;
+}
+
+.label-float-forms textarea::placeholder{
+  color:transparent;
+}
+
+.label-float-forms textarea:required:invalid + label{
+  color: red;
+}
+.label-float-forms textarea:focus:required:invalid{
+  border-bottom: 2px solid red;
+}
+.label-float-forms textarea:required:invalid + label:before{
+  content: '*';
+}
+.label-float-forms textarea:focus + label,
+.label-float-forms textarea:not(:placeholder-shown) + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: #3951b2;
+}
+/* textarea de formularios */
+
+/* selects de formularios */
+.label-float-forms select{
+  border: 0;
+  border-bottom: 2px solid lightgrey;
+  outline: none;
+  width: 570px;
+  min-width: 180px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -webkit-appearance:none;
+  border-radius: 0;
+  margin-top: 5px;
+  padding: 10px 5px;
+}
+
+.label-float-forms select:focus{
+  border-bottom: 2px solid #3951b2;
+}
+
+.label-float-forms select::placeholder{
+  color:transparent;
+}
+
+.label-float-forms select:required:invalid + label{
+  color: red;
+}
+.label-float-forms select:focus:required:invalid{
+  border-bottom: 2px solid red;
+}
+.label-float-forms select:required:invalid + label:before{
+  content: '*';
+}
+.label-float-forms select:focus + label,
+.label-float-forms select:not(:placeholder-shown) + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: #3951b2;
+}
 .menu-lateral {
   color: #FFFFFF !important;
   background-color: #007bff !important;

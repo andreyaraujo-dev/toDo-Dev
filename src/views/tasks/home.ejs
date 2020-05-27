@@ -1,0 +1,67 @@
+<%- include('../layouts/page') %>
+<%- include('../layouts/menuTop') %>
+
+<div class="row h-100">
+  <%- include('../layouts/menu') %>
+  <div class="col-sm-10 pb-5">
+    <div class="container-fluid border mt-4 h-100 p-3">
+      <div class="row mb-3">
+        <div class="col-sm-12 text-center">
+          <h1 class="text-center">All your tasks</h1>
+        </div>
+      </div>
+      <div class="container col-sm-11 m-auto">
+        <div class="row">
+          <span class="badge badge-primary">This week</span>
+        </div>
+        <div class="row mt-3 mb-3">
+          <div class="col-sm-12">
+            <% if (weekTasks.length < 0) { %>
+             <p>Nenhuma tarefa para esta semana.</p>
+            <% } %>
+            <% weekTasks.forEach(task => { %>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                    <%= task.title %>
+                    <div class="d-flex ml-auto">
+                      <i class="fa fa-square-o mr-3 icon-btn"></i>
+                      <!-- <i class="fa fa-check-square-o mr-3"></i> -->
+                      <i class="fa fa-trash text-danger icon-btn"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="row">
+          <span class="badge badge-primary">Other tasks</span>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <% if (allTasks.length < 0) { %>
+             <p>Nenhuma outra tarefa para mostrar.</p>
+            <% } %>
+            <% allTasks.forEach(task => { %>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                    <%= task.title %>
+                    <div class="d-flex ml-auto">
+                      <i class="fa fa-square-o mr-3 icon-btn"></i>
+                      <!-- <i class="fa fa-check-square-o mr-3"></i> -->
+                      <i class="fa fa-trash text-danger icon-btn"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
