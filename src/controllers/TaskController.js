@@ -22,7 +22,6 @@ class TaskController {
       if (!allTasks || !weekTasks) {
         return res.render('layouts/404');
       }
-
       return res.render('tasks/home', { user, allTasks, weekTasks });
     } catch (e) {
       return res.status(401).json({
@@ -40,7 +39,6 @@ class TaskController {
           user_id_fk: userId,
         },
       });
-      console.log(projects);
       return res.render('tasks/create', { projects, user });
     } catch (e) {
       return res.render('layouts/404');
@@ -126,11 +124,36 @@ class TaskController {
 
       await task.destroy();
 
-      return res.json(null);
+      req.flash('success', 'Task deleted');
+      return res.redirect('/tasks/');
     } catch (e) {
       return res.status(401).json({
         errors: e.errors.map((err) => err.message),
       });
+    }
+  }
+
+  async finishTask(req, res) {
+    try {
+      const idTask = req.params.id;
+
+      const task = await Task.update({ completed: 0 },
+        {
+          where: {
+            id: idTask,
+          },
+        });
+
+      if (!task) {
+        req.falsh('errors', 'Não foi possivel realizar a operação');
+        return res.redirect('/tasks/');
+      }
+
+      req.flash('success', 'Tarefa finalizada');
+      return res.redirect('/tasks/');
+    } catch (e) {
+      req.flash('errors', e);
+      return res.render('layouts/404');
     }
   }
 }

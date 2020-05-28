@@ -5,8 +5,19 @@ html, body {
   margin: 0;
 }
 
-.btn {
+.btn-login {
   border-radius: 2rem !important;
+}
+
+.menu-actions button {
+  border-radius: 2rem !important;
+}
+.div-btn-actions button {
+  border-radius: 2rem !important;
+}
+
+.text-completed {
+  text-decoration: line-through;
 }
 
 .row {
@@ -261,17 +272,16 @@ html, body {
   margin-top: 0;
   color: #3951b2;
 }
+/* -------------------------------- */
+
 .menu-lateral {
-  color: #FFFFFF !important;
-  background-color: #007bff !important;
+  color: #006bdd;
 }
 
-.menu-lateral a {
-  color: #FFFFFF !important;
-}
 
 .menu-lateral a:hover {
   background-color: #006bdd !important;
+  color: #ffffff;
 }
 
 .menu-topo {
