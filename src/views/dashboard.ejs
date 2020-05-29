@@ -83,6 +83,9 @@
                     <% } %>
                   </span>
                   <div class="d-flex ml-auto">
+                    <a href="/tasks/edit/<%= task.id %>">
+                      <i class="fa fa-edit mr-3 icon-btn"></i>
+                    </a>
                     <a data-toggle="modal" data-target="#modal-done-task-<%= task.id %>">
                       <i class="fa fa-square-o mr-3 icon-btn"></i>
                     </a>
@@ -93,8 +96,8 @@
                   </div>
                 </div>
               </div>
-              <!-- MODAL DE FINALIZAÇÃO DE TAREFA -->
-              <div class="modal fade" id="modal-done-task-<%= task.id %>" tabindex="-1" role="dialog">
+               <!-- MODAL DE FINALIZAÇÃO DE TAREFA -->
+               <div class="modal fade" id="modal-done-task-<%= task.id %>" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -191,11 +194,11 @@
                       <button type="button" class="btn btn-primary" data-dismiss="modal">
                         <i class="fa fa-times icon-btn"></i>Close
                       </button>
-                      <form action="/tasks/edit/<%= task.id %>" method="post">
-                        <button type="submit" class="btn btn-warning">
+                      <a href="/tasks/edit/<%= task.id %>">
+                        <button type="button" class="btn btn-warning">
                           <i class="fa fa-edit icon-btn"></i>Edit
                         </button>
-                      </form>
+                      </a>
                     </div>
                   </div>
                 </div>

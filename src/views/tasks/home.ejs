@@ -33,6 +33,9 @@
                        <% } %>
                     </span>
                     <div class="d-flex ml-auto">
+                      <a href="/tasks/edit/<%= task.id %>">
+                        <i class="fa fa-edit mr-3 icon-btn"></i>
+                      </a>
                       <a data-toggle="modal" data-target="#modal-done-task-<%= task.id %>">
                         <i class="fa fa-square-o mr-3 icon-btn"></i>
                       </a>
@@ -141,11 +144,11 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal">
                           <i class="fa fa-times icon-btn"></i>Close
                         </button>
-                        <form action="/tasks/edit/<%= task.id %>" method="post">
-                          <button type="submit" class="btn btn-warning">
+                        <a href="/tasks/edit/<%= task.id %>">
+                          <button type="button" class="btn btn-warning">
                             <i class="fa fa-edit icon-btn"></i>Edit
                           </button>
-                        </form>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -176,6 +179,9 @@
                        <% } %>
                     </span>
                     <div class="d-flex ml-auto">
+                      <a href="/tasks/edit/<%= task.id %>">
+                        <i class="fa fa-edit mr-3 icon-btn"></i>
+                      </a>
                       <a data-toggle="modal" data-target="#modal-done-task-<%= task.id %>">
                         <i class="fa fa-square-o mr-3 icon-btn btn-done"></i>
                       </a>
@@ -284,11 +290,11 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal">
                           <i class="fa fa-times icon-btn"></i>Close
                         </button>
-                        <form action="/tasks/edit/<%= task.id %>" method="post">
-                          <button type="submit" class="btn btn-warning">
+                        <a href="/tasks/edit/<%= task.id %>">
+                          <button type="button" class="btn btn-warning">
                             <i class="fa fa-edit icon-btn"></i>Edit
                           </button>
-                        </form>
+                        </a>
                       </div>
                     </div>
                   </div>
