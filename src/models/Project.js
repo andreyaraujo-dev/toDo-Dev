@@ -42,15 +42,6 @@ export default class Project extends Model {
           },
         },
       },
-      completed: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-        validate: {
-          isInt: {
-            msg: 'O campo concluido precisa ser inteiro',
-          },
-        },
-      },
     }, {
       sequelize,
     });

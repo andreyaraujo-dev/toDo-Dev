@@ -5,10 +5,12 @@ import { ensureAuthenticated } from '../middlewares/authentication';
 
 const router = new Router();
 
-router.post('/', ensureAuthenticated, projectController.store);
-router.put('/:id', ensureAuthenticated, projectController.update);
-router.get('/:id', ensureAuthenticated, projectController.show);
+router.post('/create', ensureAuthenticated, projectController.store);
+// router.post('/edit', ensureAuthenticated, projectController.update);
+// router.get('/edit/:id', ensureAuthenticated, projectController.edit);
+// router.get('/:id', ensureAuthenticated, projectController.show);
 router.get('/', ensureAuthenticated, projectController.index);
-router.delete('/:id', ensureAuthenticated, projectController.delete);
+router.get('/create', ensureAuthenticated, projectController.indexCreate);
+// router.post('/:id', ensureAuthenticated, projectController.delete);
 
 export default router;
