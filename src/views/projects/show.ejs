@@ -1,0 +1,378 @@
+<%- include('../layouts/page') %>
+<%- include('../layouts/menuTop') %>
+
+<div class="row h-100">
+  <%- include('../layouts/menu') %>
+  <div class="col-sm-10 pb-5">
+    <div class="container-fluid border mt-4 h-100 p-3">
+      <div class="row mb-3">
+        <div class="col-sm-12 text-center">
+          <%- include('../layouts/messages') %>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <a href="javascript:history.back()" class="ml-3" data-toggle="tooltip" data-placement="top" title="Back">
+          <i class="fa fa-chevron-left icon-btn"></i>
+        </a>
+      </div>
+      <div class="container col-sm-11 m-auto">
+        <div class="card mt-4 mb-4 shadow-lg">
+          <div class="card-body">
+            <h1 class="card-title"><%= project.title %></h1>
+            <p>
+              <%= project.description %>
+            </p>
+            <div class="row">
+              <div class="col-sm-3">
+                <i class="fa fa-calendar text-primary"></i>
+                <%= project.delivery_date %>
+              </div>
+              <div class="col-sm-3">
+                <i class="fa fa-tasks text-primary"></i>
+                <%= tasksCompletedCount.count %> tasks completed
+              </div>
+              <div class="col-sm-3">
+                <i class="fa fa-warning text-primary"></i>
+                <%= tasksPendingCount.count %> tasks pending
+              </div>
+              <div class="col-sm-2 ml-auto pl-5 pr-0">
+                <a data-toggle="modal" data-target="#modal-delete-project-<%= project.id %>">
+                  <i class="fa fa-trash text-danger icon-btn ml-auto"></i>
+                </a>
+                <i class="fa fa-square-o icon-btn ml-auto"></i>
+                <a href="/projects/edit/<%= project.id %>">
+                  <i class="fa fa-edit text-primary icon-btn ml-auto"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <span class="badge badge-primary">Tasks open</span>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <% if (tasksPending.length < 0) { %>
+              <p>Nenhuma tarefa pendente.</p>
+            <% } %>
+            <% tasksPending.forEach(task => { %>
+              <div class="card shadow-lg">
+                <div class="card-body">
+                  <div class="row">
+                    <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                    <span data-toggle="modal" data-target="#modal-details-task-<%= task.id %>">
+                      <% if (task.completed == 0) { %>
+                        <span class="text-completed"><%= task.title %></span>
+                      <% } else { %>
+                        <%= task.title %>
+                      <% } %>
+                    </span>
+                    <div class="d-flex ml-auto">
+                      <a href="/tasks/edit/<%= task.id %>">
+                        <i class="fa fa-edit mr-3 icon-btn"></i>
+                      </a>
+                      <a data-toggle="modal" data-target="#modal-done-task-<%= task.id %>">
+                        <i class="fa fa-square-o mr-3 icon-btn"></i>
+                      </a>
+                      <!-- <i class="fa fa-check-square-o mr-3"></i> -->
+                      <a data-toggle="modal" data-target="#modal-delete-task-<%= task.id %>">
+                        <i class="fa fa-trash text-danger icon-btn"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                  <!-- MODAL DE FINALIZAÇÃO DE TAREFA -->
+                  <div class="modal fade" id="modal-done-task-<%= task.id %>" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Finish Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to finish this task?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                          <i class="fa fa-times icon-btn"></i>Cancel
+                        </button>
+                        <form action="/tasks/finish/<%= task.id %>" method="post">
+                          <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check icon-btn"></i>Finish
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- MODAL DE DELEÇÃO DE TAREFA -->
+                <div class="modal fade" id="modal-delete-task-<%= task.id %>" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Delete Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete this task?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                          <i class="fa fa-times icon-btn"></i>Cancel
+                        </button>
+                        <form action="/tasks/delete/<%= task.id %>" method="post">
+                          <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-check icon-btn"></i>Delete
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- MODAL DE DETALHES DE TAREFA -->
+                <div class="modal fade" id="modal-details-task-<%= task.id %>" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Details Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group border-bottom">
+                          <label for="title">Title</label>
+                          <p id="title">
+                            <%= task.title %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="description">Description</label>
+                          <p id="description">
+                            <%= task.description %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="notes">Notes</label>
+                          <p id="notes">
+                            <%= task.notes %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="delivery-date">Delivery Date</label>
+                          <p id="delivery-date">
+                            <%= task.delivery_date %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="project">Project</label>
+                          <p id="project">
+                            <%= task.Project %>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                          <i class="fa fa-times icon-btn"></i>Close
+                        </button>
+                        <a href="/tasks/edit/<%= task.id %>">
+                          <button type="button" class="btn btn-warning">
+                            <i class="fa fa-edit icon-btn"></i>Edit
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <span class="badge badge-primary">Tasks completed</span>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <% if (tasksCompleted.length < 0) { %>
+              <p>Nenhuma tarefa finalizada.</p>
+            <% } %>
+            <% tasksCompleted.forEach(task => { %>
+              <div class="card shadow-lg">
+                <div class="card-body">
+                  <div class="row">
+                    <i class="fa fa-circle ml-2 mr-3 text-primary"></i>
+                    <span data-toggle="modal" data-target="#modal-details-task-<%= task.id %>">
+                      <% if (task.completed == 0) { %>
+                      <span class="text-completed"><%= task.title %></span>
+                      <% } else { %>
+                        <%= task.title %>
+                      <% } %>
+                    </span>
+                    <div class="d-flex ml-auto">
+                      <a href="/tasks/edit/<%= task.id %>">
+                        <i class="fa fa-edit mr-3 icon-btn"></i>
+                      </a>
+                      <a data-toggle="modal" data-target="#modal-done-task-<%= task.id %>">
+                        <i class="fa fa-square-o mr-3 icon-btn"></i>
+                      </a>
+                      <!-- <i class="fa fa-check-square-o mr-3"></i> -->
+                      <a data-toggle="modal" data-target="#modal-delete-task-<%= task.id %>">
+                        <i class="fa fa-trash text-danger icon-btn"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- MODAL DE FINALIZAÇÃO DE TAREFA -->
+                <div class="modal fade" id="modal-done-task-<%= task.id %>" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Finish Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to finish this task?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                          <i class="fa fa-times icon-btn"></i>Cancel
+                        </button>
+                        <form action="/tasks/finish/<%= task.id %>" method="post">
+                          <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check icon-btn"></i>Finish
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- MODAL DE DELEÇÃO DE TAREFA -->
+                <div class="modal fade" id="modal-delete-task-<%= task.id %>" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Delete Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete this task?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                          <i class="fa fa-times icon-btn"></i>Cancel
+                        </button>
+                        <form action="/tasks/delete/<%= task.id %>" method="post">
+                          <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-check icon-btn"></i>Delete
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- MODAL DE DETALHES DE TAREFA -->
+                <div class="modal fade" id="modal-details-task-<%= task.id %>" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Details Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group border-bottom">
+                          <label for="title">Title</label>
+                          <p id="title">
+                            <%= task.title %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="description">Description</label>
+                          <p id="description">
+                            <%= task.description %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="notes">Notes</label>
+                          <p id="notes">
+                            <%= task.notes %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="delivery-date">Delivery Date</label>
+                          <p id="delivery-date">
+                            <%= task.delivery_date %>
+                          </p>
+                        </div>
+                        <div class="form-group border-bottom">
+                          <label for="project">Project</label>
+                          <p id="project">
+                            <%= task.Project %>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                          <i class="fa fa-times icon-btn"></i>Close
+                        </button>
+                        <a href="/tasks/edit/<%= task.id %>">
+                          <button type="button" class="btn btn-warning">
+                            <i class="fa fa-edit icon-btn"></i>Edit
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        <!-- MODAL DE DELEÇÃO DE PROJETO -->
+        <div class="modal fade" id="modal-delete-project-<%= project.id %>" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete Project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this project?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                  <i class="fa fa-times icon-btn"></i>Cancel
+                </button>
+                <form action="/projects/delete/<%= project.id %>" method="post">
+                  <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-check icon-btn"></i>Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-btn-actions">
+        <a href="/tasks/create">
+        <button type="button" class="btn btn-primary btn-actions">
+          <i class="fa fa-plus"></i>
+        </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/app.js"></script>

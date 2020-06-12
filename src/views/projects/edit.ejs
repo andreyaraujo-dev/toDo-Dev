@@ -1,0 +1,84 @@
+<%- include('../layouts/page') %>
+<%- include('../layouts/menuTop') %>
+
+<div class="row h-100">
+  <%- include('../layouts/menu') %>
+  <div class="col-sm-10">
+    <div class="container-fluid border mt-4 h-100 p-3">
+      <div class="row mb-3">
+        <div class="col-sm-12 text-center">
+          <h1 class="text-center">Edit Project</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-7 m-auto border shadow-lg">
+          <div class="row mt-3">
+            <a href="javascript:history.back()" class="ml-3" data-toggle="tooltip" data-placement="top" title="Back">
+              <i class="fa fa-chevron-left icon-btn"></i>
+            </a>
+          </div>
+          <form action="/projects/edit" method="POST">
+            <input type="hidden" name="user_id_fk" value="<%= user.id %>">
+            <input type="hidden" name="id_project_fk" value="<%= project.id %>">
+
+            <div class="form-group row mt-4 ml-3">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title"
+              class="form-control border-top-0 border-right-0 border-left-0 border-bottom-primary"
+              value="<%= project.title %> ">
+            </div>
+            <div class="form-group row mt-3 ml-3">
+              <label for="description">Description</label>
+              <input type="text" name="description" id="description"
+              class="form-control border-top-0 border-right-0 border-left-0 border-bottom-primary"
+              value="<%= project.description %> ">
+            </div>
+            <div class="form-group row mt-3 ml-3">
+              <label for="color">Color</label>
+              <select name="color" id="color" class="form-control border-top-0 border-right-0 border-left-0 border-bottom-primary"
+              value="<%= project.color %> ">
+                <option value="">Select a color</option>
+                <option style="background-color: red; color: white;" value="red">Red</option>
+                <option style="background-color: blue; color: white;" value="blue">Blue</option>
+                <option style="background-color: green; color: white;" value="green">Green</option>
+                <option style="background-color: gray; color: white;" value="gray">Gray</option>
+                <option style="background-color: orange; color: white;" value="orange">Orange</option>
+              </select>
+            </div>
+            <div class="form-group row mt-3 ml-3">
+              <label for="completed">Completed</label>
+              <select name="completed" id="completed" class="form-control border-top-0 border-right-0 border-left-0 border-bottom-primary"
+              value="<%= project.completed %> ">
+                <% if (project.completed == 0) { %>
+                  <option value="<%= project.completed %>">Yes</option>
+                <% } else { %>
+                  <option value="<%= project.completed %>">No</option>
+                <% } %>
+                <option value="0">Completed</option>
+                <option value="1">Open</option>
+              </select>
+            </div>
+            <div class="form-group row mt-3 ml-3">
+              <label for="delivery_date">Delivery Date</label>
+              <input type="date" name="delivery_date" id="delivery_date"
+              class="form-control border-top-0 border-right-0 border-left-0 border-bottom-primary"
+              value="<%= project.delivery_date %> ">
+            </div>
+            <div class="form-row mt-4">
+              <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-block btn-primary">
+                  Save <i class="fa fa-check ml-2"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>

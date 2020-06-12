@@ -15,22 +15,24 @@
         <div class="row">
           <span class="badge badge-primary">Open</span>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-2">
           <% projectsOpen.forEach(project => { %>
             <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-10">
-                      <h5 class="card-title"><%= project.title %></h5>
-                      <p class="card-text"><%= project.description %> </p>
-                    </div>
-                    <div class="col-sm-2">
-                      <i class="fa fa-circle"></i>
+              <a href="/projects/details/<%= project.id %>">
+                <div class="card mt-4 shadow-lg">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-10">
+                        <h5 class="card-title"><%= project.title %></h5>
+                        <p class="card-text"><%= project.description %> </p>
+                      </div>
+                      <div class="col-sm-2">
+                        <i class="fa fa-circle"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           <% }) %>
         </div>
@@ -38,22 +40,24 @@
         <div class="row mt-4">
           <span class="badge badge-primary">Completed</span>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-2">
           <% projectsCompleted.forEach(project => { %>
             <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-10">
-                      <h5 class="card-title"><%= project.title %></h5>
-                      <p class="card-text"><%= project.description %> </p>
-                    </div>
-                    <div class="col-sm-2">
-                      <i class="fa fa-circle"></i>
+              <a href="/projects/details/<%= project.id %>">
+                <div class="card mt-4 shadow-lg">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-10">
+                        <h5 class="card-title"><%= project.title %></h5>
+                        <p class="card-text"><%= project.description %> </p>
+                      </div>
+                      <div class="col-sm-2">
+                        <i class="fa fa-circle"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           <% }) %>
         </div>

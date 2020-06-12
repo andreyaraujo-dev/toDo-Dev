@@ -3,6 +3,11 @@ html, body {
   box-sizing: border-box !important;
   padding: 0;
   margin: 0;
+  background: rgb(241, 241, 241);
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .btn-login {
@@ -286,7 +291,6 @@ html, body {
 
 .menu-topo {
   z-index: 1 !important;
-  box-shadow: 5px 0 6px #0000008c !important;
 }
 
 .div-btn-actions {

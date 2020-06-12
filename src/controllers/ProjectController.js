@@ -1,5 +1,5 @@
 import Project from '../models/Project';
-// import Task from '../models/Task';
+import Task from '../models/Task';
 
 class ProjectController {
   async index(req, res) {
@@ -52,81 +52,117 @@ class ProjectController {
     }
   }
 
-  // async show(req, res) {
-  //   try {
-  //     const idProject = req.params.id;
-  //     const project = await Project.findByPk(idProject, {
-  //       attributes: ['id', 'title', 'description', 'color', 'delivery_date', 'completed'],
-  //       include: {
-  //         model: Task,
-  //         attributes: ['id', 'title'],
-  //       },
-  //     });
+  async show(req, res) {
+    try {
+      const { user } = req;
+      const idProject = req.params.id;
+      const project = await Project.findByPk(idProject, {
+        attributes: ['id', 'title', 'description', 'color', 'delivery_date', 'completed'],
+        include: {
+          model: Task,
+          attributes: ['id', 'title'],
+        },
+      });
 
-  //     if (!project) {
-  //       return res.status(400).json({
-  //         errors: ['Project does not exist'],
-  //       });
-  //     }
+      if (!project) {
+        return res.status(400).json({
+          errors: ['Project does not exist'],
+        });
+      }
 
-  //     return res.json({ project });
-  //   } catch (e) {
-  //     return res.status(400).json({
-  //       errors: e.errors.map((err) => err.message),
-  //     });
-  //   }
-  // }
+      const tasksCompletedCount = await Task.findAndCountAll({
+        where: { completed: 0, id_project_fk: idProject },
+      });
+      const tasksPendingCount = await Task.findAndCountAll({
+        where: { completed: 1, id_project_fk: idProject },
+      });
 
-  // async delete(req, res) {
-  //   try {
-  //     const project = await Project.findByPk(req.params.id);
+      const tasksCompleted = await Task.findAll({
+        where: {
+          id_project_fk: idProject,
+          completed: 0,
+        },
+      });
 
-  //     if (!project) {
-  //       return res.status(400).json({
-  //         errors: ['Project does not exist'],
-  //       });
-  //     }
+      const tasksPending = await Task.findAll({
+        where: {
+          id_project_fk: idProject,
+          completed: 1,
+        },
+      });
 
-  //     await project.destroy();
+      return res.render('projects/show', {
+        project, user, tasksCompletedCount, tasksPendingCount, tasksCompleted, tasksPending,
+      });
+    } catch (e) {
+      return res.render('layouts/404', { msg: e });
+    }
+  }
 
-  //     return res.json({ success: ['Porject has deleted successfuly!'] });
-  //   } catch (e) {
-  //     return res.status(400).json({
-  //       errors: e.errors.map((err) => err.message),
-  //     });
-  //   }
-  // }
+  async edit(req, res) {
+    try {
+      const { user } = req;
+      const idProject = req.params.id;
+      const project = await Project.findByPk(idProject, {
+        attributes: ['id', 'title', 'description', 'color', 'delivery_date', 'completed'],
+      });
 
-  // async update(req, res) {
-  //   try {
-  //     if (!req.params.id) {
-  //       return res.status(400).json({
-  //         errors: ['ID not received'],
-  //       });
-  //     }
+      if (!project) {
+        return res.status(400).json({
+          errors: ['Project does not exist'],
+        });
+      }
 
-  //     const project = await Project.findByPk(req.params.id);
+      return res.render('projects/edit', {
+        project, user,
+      });
+    } catch (e) {
+      return res.render('layouts/404', { msg: e });
+    }
+  }
 
-  //     if (!project) {
-  //       return res.status(400).json({
-  //         errors: ['Project does not exist'],
-  //       });
-  //     }
+  async delete(req, res) {
+    try {
+      const project = await Project.findByPk(req.params.id);
 
-  //     const newProject = await project.update(req.body);
+      if (!project) {
+        return res.status(400).json({
+          errors: ['Project does not exist'],
+        });
+      }
 
-  //     const {
-  //       id, title, description, color, delivery_date, completed,
-  //     } = newProject;
-  //     return res.json({
-  //       id, title, description, color, delivery_date, completed,
-  //     });
-  //   } catch (e) {
-  //     return res.status(400).json({
-  //       errors: e.errors.map((err) => err.message),
-  //     });
-  //   }
-  // }
+      await project.destroy();
+
+      req.flash('success', 'Porject has deleted successfuly!');
+      return res.redirect('/projects');
+    } catch (e) {
+      return res.render('layouts/404', { msg: e });
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const { id_project_fk } = req.body;
+      const project = await Project.findByPk(id_project_fk);
+
+      if (!project) {
+        return res.status(400).json({
+          errors: ['Project does not exist'],
+        });
+      }
+
+      const newProject = await project.update(req.body);
+
+      if (!newProject) {
+        return res.render('projects/show', { errors: 'Não foi possível atualizar!' });
+      }
+
+      req.flash('success', 'Projeto atualizado com sucesso');
+      return res.redirect(`/projects/details/${newProject.id}`);
+    } catch (e) {
+      return res.render('layouts/404', { msg: e });
+    }
+  }
 }
 
 export default new ProjectController();
