@@ -75,6 +75,7 @@ class TaskController {
       return res.redirect('/tasks');
     } catch (e) {
       const msg = req.flash('errors', e);
+      console.log(e);
       return res.render('layouts/404', { msg });
     }
   }
@@ -172,11 +173,12 @@ class TaskController {
       console.log('------------------');
       console.log(idTask);
       console.log('-------------------');
-      const task = await Task.findByPk(idTask);
-      const newTask = await task.update({ completed: '0' });
+      // const task = await Task.findByPk(idTask);
+      // const completed = { completed: '0' };
+      const newTask = await Task.update({ completed: 0 }, { where: { id: idTask } });
       console.log(newTask);
       console.log('----------------------');
-      if (!task) {
+      if (!newTask) {
         req.falsh('errors', 'Não foi possivel realizar a operação');
         return res.redirect('/tasks/');
       }
